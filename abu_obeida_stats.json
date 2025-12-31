@@ -1,0 +1,101 @@
+{
+  "total_comments": 778,
+  "total_videos_analyzed": 8,
+  "sentiments": {
+    "negative": 19,
+    "positive": 275,
+    "neutral": 484
+  },
+  "themes": {
+    "grief": 19,
+    "martyrdom": 34,
+    "neutral": 484,
+    "leadership": 34,
+    "solidarity": 37,
+    "resistance": 21,
+    "pride": 39,
+    "eloquence": 42,
+    "hope": 31,
+    "admiration": 37
+  },
+  "languages": {
+    "Arabic": 439,
+    "English": 281,
+    "Spanish": 21,
+    "Turkish": 16,
+    "French": 21
+  },
+  "average_polarity": 0.1027,
+  "top_comments": [
+    {
+      "text": "يا ليت يضعون ترجمة للإنجليزية",
+      "likes": 60,
+      "language": "Arabic",
+      "sentiment": "neutral",
+      "themes": "neutral"
+    },
+    {
+      "text": "متى سيتم نشر البيان القادم؟",
+      "likes": 50,
+      "language": "Arabic",
+      "sentiment": "neutral",
+      "themes": "neutral"
+    },
+    {
+      "text": "Link to the original statement?",
+      "likes": 50,
+      "language": "English",
+      "sentiment": "neutral",
+      "themes": "neutral"
+    },
+    {
+      "text": "أبو عبيدة رجل شجاع ومتحدث بليغ - الله يحفظه",
+      "likes": 50,
+      "language": "Arabic",
+      "sentiment": "positive",
+      "themes": "admiration"
+    },
+    {
+      "text": "Quelqu'un peut traduire en français?",
+      "likes": 50,
+      "language": "English",
+      "sentiment": "neutral",
+      "themes": "neutral"
+    },
+    {
+      "text": "أحتاج إلى مصادر إضافية لفهم الموقف",
+      "likes": 30,
+      "language": "Arabic",
+      "sentiment": "neutral",
+      "themes": "neutral"
+    },
+    {
+      "text": "ما هو مصدر هذا الفيديو؟",
+      "likes": 30,
+      "language": "Arabic",
+      "sentiment": "neutral",
+      "themes": "neutral"
+    },
+    {
+      "text": "This man speaks with such dignity and power. A true leader.",
+      "likes": 30,
+      "language": "English",
+      "sentiment": "positive",
+      "themes": "martyrdom"
+    },
+    {
+      "text": "Quelqu'un peut traduire en français?",
+      "likes": 30,
+      "language": "English",
+      "sentiment": "neutral",
+      "themes": "neutral"
+    },
+    {
+      "text": "أحتاج إلى مصادر إضافية لفهم الموقف",
+      "likes": 30,
+      "language": "Arabic",
+      "sentiment": "neutral",
+      "themes": "neutral"
+    }
+  ]
+}
