@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Gaza YouTube Analytics - HDFS Site Configuration
+  Defines replication factor, block size, and storage directories
+-->
+<configuration>
+    <!-- Replication factor -->
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+        <description>Number of replicas for each HDFS block (set to 1 for development)</description>
+    </property>
+
+    <!-- Block size -->
+    <property>
+        <name>dfs.blocksize</name>
+        <value>134217728</value>
+        <description>HDFS block size in bytes (128 MB)</description>
+    </property>
+
+    <!-- NameNode data directory -->
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///hadoop/dfs/name</value>
+        <description>NameNode metadata storage directory</description>
+    </property>
+
+    <!-- DataNode data directory -->
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///hadoop/dfs/data</value>
+        <description>DataNode block storage directory</description>
+    </property>
+
+    <!-- Secondary NameNode checkpoint directory -->
+    <property>
+        <name>dfs.namenode.checkpoint.dir</name>
+        <value>file:///hadoop/dfs/namesecondary</value>
+        <description>Secondary NameNode checkpoint storage</description>
+    </property>
+
+    <!-- NameNode HTTP address -->
+    <property>
+        <name>dfs.namenode.http-address</name>
+        <value>namenode:9870</value>
+        <description>NameNode Web UI address</description>
+    </property>
+
+    <!-- Secondary NameNode HTTP address -->
+    <property>
+        <name>dfs.namenode.secondary.http-address</name>
+        <value>secondarynamenode:9868</value>
+        <description>Secondary NameNode Web UI address</description>
+    </property>
+
+    <!-- DataNode HTTP address -->
+    <property>
+        <name>dfs.datanode.http.address</name>
+        <value>0.0.0.0:9864</value>
+        <description>DataNode Web UI address</description>
+    </property>
+
+    <!-- Permissions -->
+    <property>
+        <name>dfs.permissions.enabled</name>
+        <value>false</value>
+        <description>Disable HDFS permissions for development</description>
+    </property>
+
+    <!-- WebHDFS -->
+    <property>
+        <name>dfs.webhdfs.enabled</name>
+        <value>true</value>
+        <description>Enable WebHDFS REST API</description>
+    </property>
+
+    <!-- NameNode handler count -->
+    <property>
+        <name>dfs.namenode.handler.count</name>
+        <value>10</value>
+        <description>Number of server threads for NameNode</description>
+    </property>
+
+    <!-- DataNode handler count -->
+    <property>
+        <name>dfs.datanode.handler.count</name>
+        <value>10</value>
+        <description>Number of server threads for DataNode</description>
+    </property>
+</configuration>

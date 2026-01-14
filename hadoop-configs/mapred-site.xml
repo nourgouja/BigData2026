@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Gaza YouTube Analytics - MapReduce Site Configuration
+  Defines MapReduce framework and JobHistory server
+-->
+<configuration>
+    <!-- MapReduce framework -->
+    <property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+        <description>Use YARN as the MapReduce framework</description>
+    </property>
+
+    <!-- JobHistory Server address -->
+    <property>
+        <name>mapreduce.jobhistory.address</name>
+        <value>namenode:10020</value>
+        <description>JobHistory Server IPC address</description>
+    </property>
+
+    <!-- JobHistory Server Web UI -->
+    <property>
+        <name>mapreduce.jobhistory.webapp.address</name>
+        <value>namenode:19888</value>
+        <description>JobHistory Server Web UI address</description>
+    </property>
+
+    <!-- Map memory -->
+    <property>
+        <name>mapreduce.map.memory.mb</name>
+        <value>1024</value>
+        <description>Memory for map tasks (1 GB)</description>
+    </property>
+
+    <!-- Reduce memory -->
+    <property>
+        <name>mapreduce.reduce.memory.mb</name>
+        <value>1024</value>
+        <description>Memory for reduce tasks (1 GB)</description>
+    </property>
+
+    <!-- Map Java opts -->
+    <property>
+        <name>mapreduce.map.java.opts</name>
+        <value>-Xmx819m</value>
+        <description>JVM options for map tasks</description>
+    </property>
+
+    <!-- Reduce Java opts -->
+    <property>
+        <name>mapreduce.reduce.java.opts</name>
+        <value>-Xmx819m</value>
+        <description>JVM options for reduce tasks</description>
+    </property>
+
+    <!-- Application classpath -->
+    <property>
+        <name>mapreduce.application.classpath</name>
+        <value>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*:$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*</value>
+    </property>
+</configuration>

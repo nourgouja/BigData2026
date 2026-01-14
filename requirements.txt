@@ -1,4 +1,23 @@
-streamlit
-pandas
-plotly
-textblob
+# Gaza YouTube Analytics - Big Data Project
+# Python Dependencies for PySpark Analytics Pipeline
+
+# Core Processing
+pyspark>=3.5.0              # Distributed data processing on Hadoop/Spark
+pandas>=1.5.0               # Data manipulation and analysis
+pyarrow>=10.0.0             # Parquet file support for Spark
+
+# NLP & Sentiment Analysis
+nltk>=3.8                   # Natural Language Processing toolkit
+vaderSentiment>=3.3.2       # Sentiment analysis (VADER lexicon)
+
+# Visualization
+plotly>=5.17.0              # Interactive visualizations in Jupyter
+matplotlib>=3.7.0           # Static plotting
+wordcloud>=1.9.0            # Keyword wordcloud generation
+
+# Data Collection
+google-api-python-client>=2.0.0  # YouTube Data API v3
+
+# Jupyter Notebook
+jupyter>=1.0.0              # Jupyter notebook environment
+ipykernel>=6.25.0           # Python kernel for Jupyter
