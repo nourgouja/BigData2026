@@ -1,57 +1,57 @@
 
 # Gaza YouTube Analytics - Summary Report
-Generated: 2026-01-16 22:35:06
+Generated: 2026-01-16 23:13:48
 
 ## Dataset Overview
-- **Total Videos**: 575
-- **Total Views**: 6,127,440,837
-- **Total Likes**: 144,084,696
-- **Total Comments**: 5,966,736
-- **Date Range**: 2023-10-07 to 2025-12-20
-- **Unique Channels**: 276
+- **Total Videos**: 63
+- **Total Views**: 1,932,397,634
+- **Total Likes**: 39,390,610
+- **Total Comments**: 1,551,968
+- **Date Range**: 2023-10-07 to 2025-11-02
+- **Unique Channels**: 52
 
 ## Top 10 Keywords
   keyword  frequency
-   israel        949
-     gaza        653
-palestina        554
-     news        516
-palestine        368
-      غزة        327
-    hamas        285
-      على        245
-   follow        189
-  الجزيرة        187
+    مباشر         71
+   israel         63
+      غزة         63
+palestine         51
+     gaza         50
+  الجزيرة         46
+      على         40
+     البث         35
+     news         33
+    الحدث         33
 
 ## Top 10 Channels by Video Count
-                               channel  video_count  total_views
-        AlJazeera Arabic  قناة الجزيرة           24    201297164
-                             TRT World           19    236647823
-Al Jazeera Mubasher قناة الجزيرة مباشر           17    140903486
-                    Al Jazeera English           14     98594839
-                     AlArabiya العربية            9     87123619
-           PalestineTV  تلفزيون فلسطين            9     88566707
-                           AJ+ Español            9     26776981
-                       العربي - أخبار             8     64035474
-                          The Guardian            7     27722109
-                            TBN Israel            7      6303620
+                     channel  video_count  total_views
+                Dhruv Rathee            3     51541597
+              AlHadath الحدث            3    178393552
+                         AJ+            2     33052430
+AlternativeGeopoliticsMapped            2     39760444
+                   TRT World            2     42958020
+                Ulusal Kanal            2     16406150
+                   Sama Tube            2     79191519
+                    بنت غزه             2     78260150
+           Meaningful People            2     39597928
+                 Abu Elhabal            1     69112357
 
 ## Language Distribution
 language  video_count  total_views
- english          310   3700662770
-  arabic          181   2079923148
-  french           84    346854919
+ english           35    912460683
+  arabic           20    920868476
+  french            8     99068475
 
 Note: Language detection based on text character patterns (Arabic Unicode, Latin scripts).
 YouTube Data API v3 does not provide explicit language or country fields for this dataset.
 
 ## Top 5 Videos by Engagement Score
                                                                                           title        channel  view_count  engagement_score
-KERETA API VS TELUR PALESTINA & TELUR ISRAEL  #shorts #keretaapi #palestine #israel #viralvideo    Business 33    33119807           1911796
-                                    عشرات الشبان يرشقون القوات الإسرائيلية بالحجارة في رام الله AlHadath الحدث    92497766           1757706
-       Beneath these ruins ,our dreams & memories are buried 🥀#gaza #war #home #shorts #explore      Sama Tube    60070480           1574572
-       Beneath these ruins ,our dreams & memories are buried 🥀#gaza #war #home #shorts #explore      Sama Tube    60070480           1574572
-                  love you Palestina🇯🇴 #fypシ #rameindong #masukberanda #video #jj #palestine  ♥         rara🐣💢    44693495           1550641
+      İsrail'in Bombardımanında Oğlunu Kaybeden Filistinli Baba Morga Dalıp Feryat Etti #shorts  TGRT Haber TV   123248953           2172433
+KERETA API VS TELUR PALESTINA & TELUR ISRAEL  #shorts #keretaapi #palestine #israel #viralvideo    Business 33    33460242           1918008
+                                    عشرات الشبان يرشقون القوات الإسرائيلية بالحجارة في رام الله AlHadath الحدث    92500290           1756956
+       Beneath these ruins ,our dreams & memories are buried 🥀#gaza #war #home #shorts #explore      Sama Tube    60082031           1571953
+                  love you Palestina🇯🇴 #fypシ #rameindong #masukberanda #video #jj #palestine  ♥         rara🐣💢    44848160           1549266
 
 ## Data Fields Available
 - video_id, title, description, channel, published_at
@@ -64,10 +64,10 @@ KERETA API VS TELUR PALESTINA & TELUR ISRAEL  #shorts #keretaapi #palestine #isr
 
 ## Deliverables Generated
 ✅ top_keywords.csv (50 keywords)
-✅ freq_by_channel.csv (276 channels)
+✅ freq_by_channel.csv (52 channels)
 ✅ freq_by_language.csv (3 languages - pattern-based detection)
 ✅ top_videos_by_engagement.csv (top 50 videos)
-✅ timeseries_daily.csv (292 days)
+✅ timeseries_daily.csv (53 days)
 ✅ barplot_top_keywords.png
 ✅ barplot_top_channels.png
 ✅ piechart_language.png
