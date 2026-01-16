@@ -13,12 +13,42 @@ Workaround: Extract language hints from title/description text patterns
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 import seaborn as sns
 from wordcloud import WordCloud
 from collections import Counter
 import re
 from datetime import datetime
 import os
+import warnings
+
+# Configure matplotlib for Arabic support
+# Suppress font warnings
+warnings.filterwarnings('ignore', category=UserWarning, module='matplotlib')
+
+# Find and use a font that supports Arabic
+try:
+    # Priority list of Arabic-supporting fonts
+    arabic_fonts = ['Noto Sans Arabic', 'DejaVu Sans', 'Arial', 'Tahoma']
+    available_fonts = [f.name for f in fm.fontManager.ttflist]
+    
+    selected_font = None
+    for font in arabic_fonts:
+        if font in available_fonts:
+            selected_font = font
+            break
+    
+    if selected_font:
+        # Set font globally for all plots
+        plt.rcParams['font.sans-serif'] = [selected_font] + plt.rcParams['font.sans-serif']
+        plt.rcParams['font.family'] = 'sans-serif'
+        # Enable right-to-left text support
+        plt.rcParams['axes.unicode_minus'] = False
+        print(f"✅ Using font: {selected_font} (full Arabic support)")
+    else:
+        print("⚠️  Warning: No Arabic font found, text may display as squares")
+except Exception as e:
+    print(f"⚠️  Font configuration warning: {e}")
 
 # Output directory
 OUTPUT_DIR = "artifacts/analytics/2026-01-16"
