@@ -89,3 +89,54 @@ check-capacity: ## Show HDFS storage capacity and usage
 list-data: ## List all files in /data directory
 	@echo "=== HDFS /data Directory ==="
 	docker exec namenode hdfs dfs -ls -h -R /data 2>/dev/null || echo "No /data directory found (create with: hdfs dfs -mkdir -p /data)"
+ingest-youtube: ## Ingest YouTube data to HDFS
+	@echo "=== Ingesting YouTube Data to HDFS ==="
+	@if [ ! -f gaza_videos.jsonl ]; then \
+		echo "❌ Error: gaza_videos.jsonl not found!"; \
+		echo "Run: python3 collect-gaza-videos.py first"; \
+		exit 1; \
+	fi
+	docker exec namenode hdfs dfs -mkdir -p /data/raw/youtube
+	docker cp gaza_videos.jsonl namenode:/tmp/
+	docker exec namenode hdfs dfs -put -f /tmp/gaza_videos.jsonl /data/raw/youtube/
+	@echo "✅ Data ingested to /data/raw/youtube/"
+	docker exec namenode hdfs dfs -ls -h /data/raw/youtube/
+
+analytics: ## Run complete analytics pipeline (PDF requirements)
+	@echo "=== Gaza YouTube Analytics Pipeline ==="
+	@echo "Validating requirements..."
+	@if [ ! -f gaza_videos.jsonl ]; then \
+		echo "❌ Error: gaza_videos.jsonl not found!"; \
+		echo "Run: python3 collect-gaza-videos.py first"; \
+		exit 1; \
+	fi
+	@echo "✅ Data file found (gaza_videos.jsonl)"
+	@echo ""
+	@echo "Setting up virtual environment..."
+	@if [ ! -d venv ]; then \
+		python3 -m venv venv; \
+		./venv/bin/pip install -q pandas matplotlib seaborn wordcloud; \
+	fi
+	@echo "✅ Virtual environment ready"
+	@echo ""
+	@echo "Running analytics_complete.py..."
+	./venv/bin/python3 analytics_complete.py
+	@echo ""
+	@echo "=== Analytics Complete! ==="
+	@echo "Output directory: artifacts/analytics/$$(date +%Y-%m-%d)/"
+	@echo ""
+	@echo "Generated files:"
+	@ls -lh artifacts/analytics/$$(date +%Y-%m-%d)/ 2>/dev/null || true
+
+test-e2e: ## End-to-end test: ingest + PySpark analytics
+	@echo "=== End-to-End Pipeline Test ==="
+	@echo "Step 1: Ingest data to HDFS..."
+	@make ingest-youtube
+	@echo ""
+	@echo "Step 2: Run PySpark analytics..."
+	docker exec spark-master spark-submit --master spark://spark-master:7077 /opt/workspace/pyspark_gaza.py
+	@echo ""
+	@echo "Step 3: Verify HDFS outputs..."
+	docker exec namenode hdfs dfs -ls -h -R /results/ 2>/dev/null || echo "⚠️  No /results directory found"
+	@echo ""
+	@echo "✅ E2E test complete!"
