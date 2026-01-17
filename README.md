@@ -25,23 +25,26 @@
 
 ---
 
-## 🎯 Overview
+## 📌 Overview
 
-This project implements a **distributed Big Data pipeline** for analyzing YouTube video content related to the Gaza conflict using **Apache Hadoop** and **Apache Spark** in a Dockerized cluster environment. The system performs:
+This project presents a distributed Big Data analytics pipeline designed to study YouTube videos related to the Gaza conflict. The system is built using Apache Hadoop for distributed storage and Apache Spark (PySpark) for parallel data processing, all deployed inside a Dockerized cluster.
 
-- **Large-scale data collection** from YouTube Data API v3
-- **Distributed storage** using Hadoop HDFS
-- **Parallel processing** with PySpark
-- **Natural Language Processing** (NLP) with VADER sentiment analysis
-- **Advanced analytics** including TF-IDF keyword extraction and temporal trend analysis
-- **Interactive visualization** via Jupyter notebooks with Plotly
+The pipeline enables:
+-**Large-scale YouTube data extraction via YouTube Data API v3**
+-**Distributed storage with HDFS**
+-**Parallel analytics using PySpark**
+-**Sentiment analysis using VADER (NLP)**
+-**Keyword extraction with TF-IDF**
+-**Time-based trend analysis**
+-**Interactive visualizations using Plotly and Jupyter**
+-**This project is intended for academic Big Data experimentation and demonstrates an end-to-end data engineering workflow.**
 
-### Key Features
+### Main Capabilities
 
 ✅ **Fully containerized** Hadoop cluster (Docker Compose)  
-✅ **Scalable architecture** supporting millions of records  
+✅ **Scalable processing for large datasets** supporting millions of records  
 ✅ **Multi-language support** (Arabic, English, French, Spanish, Turkish, Urdu)  
-✅ **Real-time sentiment analysis** with VADER (-1 to +1 polarity)  
+✅ **Sentiment polarity scoring** with VADER (-1 to +1 polarity)  
 ✅ **Production-ready** error handling and data validation  
 ✅ **Interactive dashboards** with Plotly visualizations  
 ✅ **HDFS Web UI** integration for cluster monitoring  
@@ -49,6 +52,29 @@ This project implements a **distributed Big Data pipeline** for analyzing YouTub
 ---
 
 ## 🏗️ Architecture
+User Scripts → HDFS → PySpark → Analytics Output → Visualization
+
+
+CLIENT LAYER
+- collect-gaza-videos.py
+- ingest_and_viz.sh
+- gaza_dashboard.ipynb
+
+HADOOP CLUSTER (Docker)
+- NameNode
+- Secondary NameNode
+- 4 DataNodes
+- HDFS Storage
+
+SPARK CLUSTER
+- Spark Master
+- 2 Spark Workers
+- PySpark analytics job
+
+VISUALIZATION
+- Plotly
+- Matplotlib
+- WordCloud
 
 ### System Architecture Diagram
 
@@ -128,7 +154,7 @@ YouTube API → JSON → JSONL → HDFS → PySpark → Parquet/CSV → Jupyter 
 
 ---
 
-## 🔧 Prerequisites
+## ⚙️ Requirements
 
 ### System Requirements
 
@@ -164,7 +190,7 @@ pip install -r requirements.txt
 
 ---
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### Step 1: Clone Repository
 
@@ -367,33 +393,32 @@ This script performs:
 ╔══════════════════════════════════════════════════════════════════╗
 ║         GAZA YOUTUBE ANALYTICS - HADOOP PIPELINE               ║
 ╚══════════════════════════════════════════════════════════════════╝
+📋 STEP 1: JSON → JSONL Conversion
+✅ Generated gaza_videos.jsonl successfully (575 records)
 
-📋 STEP 1: Converting JSON to JSONL format...
-✅ Converted to JSONL: gaza_videos.jsonl (575 records)
+🐳 STEP 2: Transfer to Hadoop Container
+✅ Copied gaza_videos.jsonl into namenode:/tmp/
 
-🐳 STEP 2: Copying JSONL to Hadoop container...
-✅ Copied gaza_videos.jsonl to namenode:/tmp/
+📁 STEP 3: HDFS Folder Setup
+✅ Created required HDFS paths
 
-📁 STEP 3: Creating HDFS directories...
-✅ Created HDFS directories
+📤 STEP 4: Upload Dataset to HDFS
+✅ Uploaded file to: /raw/youtube/gaza_videos.jsonl
 
-📤 STEP 4: Uploading JSONL to HDFS...
-✅ Uploaded to HDFS: /raw/youtube/gaza_videos.jsonl
+⚡ STEP 5: NLP Dependencies Setup (Spark)
+✅ Installed NLTK + VADER Sentiment
 
-⚡ STEP 5: Installing NLP dependencies in Spark...
-✅ NLTK and VADER sentiment installed
+⚡ STEP 6: Launching PySpark Analytics Job
+24/01/15 10:30:45 INFO SparkContext: Spark 3.5.0 started
+24/01/15 10:30:48 INFO SharedState: hive.metastore.warehouse.dir configured
+[Sentiment Progress: 575/575 processed]
+24/01/15 10:31:22 INFO FileFormatWriter: Write completed successfully
+✅ PySpark job finished with no errors!
 
-⚡ STEP 6: Running PySpark analytics job...
-24/01/15 10:30:45 INFO SparkContext: Running Spark version 3.5.0
-24/01/15 10:30:48 INFO SharedState: Setting hive.metastore.warehouse.dir
-[Sentiment Analysis Progress: 575/575 records processed]
-24/01/15 10:31:22 INFO FileFormatWriter: Write Job finished successfully
-✅ PySpark job completed successfully!
+📥 STEP 7: Export Results from HDFS
+✅ Results pulled locally into: ./hdfs_results
 
-📥 STEP 7: Downloading results from HDFS...
-✅ Results downloaded to: ./hdfs_results
-
-🔄 STEP 8: Converting Parquet to CSV...
+🔄 STEP 8: Parquet → CSV Conversion
 ✅ top_channels.csv (37.2 KB)
 ✅ temporal_trends.csv (18.5 KB)
 ✅ top_keywords.csv (5.8 KB)
@@ -401,13 +426,13 @@ This script performs:
 ✅ viral_videos.csv (42.1 KB)
 
 ╔══════════════════════════════════════════════════════════════════╗
-║                    PIPELINE COMPLETE! ✅                        ║
+║ ✅ PIPELINE EXECUTION FINISHED ║
 ╚══════════════════════════════════════════════════════════════════╝
 
-📊 Next Steps:
-   1. Open gaza_dashboard.ipynb in Jupyter
-   2. Run all cells to visualize results
-   3. View CSV files in ./hdfs_results/
+📊 Next steps:
+Open gaza_dashboard.ipynb in Jupyter
+Run all notebook cells to generate charts
+Check the CSV outputs inside ./hdfs_results/
 ```
 
 ---
@@ -472,87 +497,78 @@ jupyter lab
 ---
 
 ## 📁 Project Structure
-
 ```
-ds bigdata/
+ds_bigdata/
 │
-├── README.md                          # This file
-├── REPORT.md                          # Academic project report
-├── requirements.txt                   # Python dependencies
+├── README.md                          # Main project documentation
+├── REPORT.md                          # Final academic report
+├── requirements.txt                   # Python package dependencies
 │
 ├── 📊 Data Collection
-│   ├── collect-gaza-videos.py         # YouTube API data collector
-│   ├── gaza_videos.json               # Raw collected data
-│   └── gaza_videos.jsonl              # HDFS-ready format
+│   ├── collect-gaza-videos.py         # Script for YouTube API data extraction
+│   ├── gaza_videos.json               # Raw YouTube dataset
+│   └── gaza_videos.jsonl              # JSONL version prepared for HDFS
 │
-├── 🔥 PySpark Processing
-│   ├── pyspark_gaza.py                # Main PySpark analytics script
-│   ├── README_PYSPARK.md              # PySpark documentation
-│   └── prepare_hdfs_data.sh           # HDFS preparation script
+├── 🔥 PySpark Analytics
+│   ├── pyspark_gaza.py                # Distributed PySpark processing script
+│   ├── README_PYSPARK.md              # PySpark execution notes
+│   └── prepare_hdfs_data.sh           # Script for initializing HDFS folders
 │
-├── 🐳 Deployment & Orchestration
-│   ├── ingest_and_viz.sh              # End-to-end pipeline script
-│   └── docker-compose.yml             # Hadoop cluster definition (if present)
+├── 🐳 Deployment & Automation
+│   ├── ingest_and_viz.sh              # Full pipeline automation script
+│   └── docker-compose.yml             # Hadoop & Spark cluster configuration
 │
 ├── 📈 Visualization & Analysis
-│   ├── gaza_dashboard.ipynb           # Jupyter interactive dashboard
-│   ├── sentiment_dashboard.py         # Matplotlib visualizations
-│   ├── dashboard_gaza.py              # Static chart generator
-│   └── analyze_sentiments_emotions.py # Local sentiment analysis
+│   ├── gaza_dashboard.ipynb           # Interactive Jupyter dashboard
+│   ├── sentiment_dashboard.py         # Sentiment plots (Matplotlib)
+│   ├── dashboard_gaza.py              # Static visualization generator
+│   └── analyze_sentiments_emotions.py # Local sentiment processing script
 │
-├── 📂 Data Files
-│   ├── gaza_full_575.json             # Full dataset (575 videos)
-│   ├── gaza_sample.json               # Sample dataset
-│   ├── gaza_comments_sentiments.csv   # Sentiment analysis results
-│   ├── sentiments_stats.json          # Aggregated statistics
-│   └── top_channels.csv               # Top channels data
+├── 📂 Datasets
+│   ├── gaza_full_575.json             # Complete dataset (575 videos)
+│   ├── gaza_sample.json               # Reduced sample dataset
+│   ├── gaza_comments_sentiments.csv   # Comment sentiment results
+│   ├── sentiments_stats.json          # Aggregated sentiment statistics
+│   └── top_channels.csv               # Channel ranking data
 │
 ├── 🖼️ Outputs
-│   ├── hdfs_results/                  # Downloaded HDFS results
+│   ├── hdfs_results/                  # Data retrieved from HDFS
 │   │   ├── df_top_channels.parquet
 │   │   ├── df_trends.csv
 │   │   ├── df_sentiment.parquet
 │   │   ├── df_viral.csv
 │   │   └── df_keywords.csv
 │   │
-│   └── visualizations/                # Generated charts (PNG)
+│   └── visualizations/                # Generated result charts
 │       ├── dashboard_top_channels.png
 │       ├── dashboard_engagement.png
 │       └── sentiment_analysis_dashboard.png
 │
 └── 📚 Documentation
     └── documentation/
-        └── 6containers.png            # Architecture diagram
-```
+        └── 6containers.png            # Cluster architecture diagram
 
----
 
-## 📊 Results & Outputs
-
-### HDFS Storage Structure
-
-```
 hdfs://localhost:9000/
 │
 ├── /raw/youtube/
-│   └── gaza_videos.jsonl              # 575 videos, ~8.5 MB
+│   └── gaza_videos.jsonl              # 575 videos (~8.5 MB)
 │
 └── /processed/gaza_analytics/
-    ├── df_top_channels.parquet/       # Top 10 channels by engagement
+    ├── df_top_channels.parquet/       # Top channels ranked by engagement
     │   └── part-00000.snappy.parquet
-    ├── df_trends.csv/                 # Weekly temporal trends
+    ├── df_trends.csv/                 # Weekly publishing trends
     │   └── part-00000.csv
-    ├── df_sentiment.parquet/          # Full sentiment analysis
+    ├── df_sentiment.parquet/          # Sentiment analysis results
     │   ├── part-00000.snappy.parquet
     │   └── part-00001.snappy.parquet
-    ├── df_viral.csv/                  # Viral videos (>1M views)
+    ├── df_viral.csv/                  # High-visibility videos (>1M views)
     │   └── part-00000.csv
-    ├── df_keywords.csv/               # Top 50 keywords (TF-IDF)
+    ├── df_keywords.csv/               # Top 50 TF-IDF keywords
     │   └── part-00000.csv
-    └── df_channel_sentiment.parquet/  # Channel-level sentiment
+    └── df_channel_sentiment.parquet/  # Average sentiment per channel
         └── part-00000.snappy.parquet
 ```
-
 ### Sample Output Data
 
 **Top Channels (df_top_channels.csv)**
@@ -807,16 +823,7 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) file
 
 ---
 
-## 📞 Support & Contact
-
-- **Project Lead**: Data Science & Big Data Course
-- **Email**: support@example.com
-- **Issue Tracker**: GitHub Issues
-- **Documentation**: [Wiki](https://github.com/your-repo/wiki)
-
----
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **YouTube Data API** for providing access to public video data
 - **Apache Software Foundation** for Hadoop and Spark frameworks
@@ -830,8 +837,6 @@ This project is licensed under the **MIT License** - see [LICENSE](LICENSE) file
 
 **🇵🇸 Gaza YouTube Analytics**  
 *Big Data Analysis for Social Impact*
-
-Built with ❤️ using Hadoop, PySpark, and Docker
 
 [Documentation](README_PYSPARK.md) • [Report](REPORT.md) • [Issues](https://github.com/issues)
 
